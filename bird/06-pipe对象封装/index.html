@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+
+        }
+    </style>
+
+</head>
+<body>
+<canvas width="800" height="400" style="border: 1px solid #000;"></canvas>
+<script src="Pipe.js"></script>
+<script>
+    var cs=document.querySelector('canvas');
+    var ctx=cs.getContext('2d');
+
+    var upImg=new Image();
+    var downImg=new Image();
+
+    upImg.onload=function(){
+        var p1=new Pipe({
+            ctx:ctx,
+            upImg:upImg,
+            downImg:downImg,
+            index:0
+        });
+
+        var p2=new Pipe({
+            ctx:ctx,
+            upImg:upImg,
+            downImg:downImg,
+            index:1
+        });
+
+        var p3=new Pipe({
+            ctx:ctx,
+            upImg:upImg,
+            downImg:downImg,
+            index:2
+        });
+
+        var p4=new Pipe({
+            ctx:ctx,
+            upImg:upImg,
+            downImg:downImg,
+            index:3
+        });
+
+
+        var p5=new Pipe({
+            ctx:ctx,
+            upImg:upImg,
+            downImg:downImg,
+            index:4
+        });
+
+        setInterval(function(){
+            ctx.clearRect(0,0,cs.width,cs.height);
+            ctx.beginPath();
+            p1.render();
+            p2.render();
+            p3.render();
+            p4.render();
+            p5.render();
+        },20)
+
+        window.onmousemove=function(e){
+            var x=e.offsetX;
+            var y=e.offsetY;
+            console.log(x);
+            console.log(y);
+
+            if(ctx.isPointInPath(x,y)){ //判断鼠标的坐标是否在路径中
+                alert(100);
+            }
+        }
+
+
+
+    }
+
+    upImg.src='../imgs/pipe2.png';
+    downImg.src='../imgs/pipe1.png';
+
+</script>
+</body>
+</html>
